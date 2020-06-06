@@ -8,8 +8,19 @@
   margin-top: 20px;
 }
 
-.image-thumbnails img {
+/* Class with descendant selector */
+.image-thumbnails img{
   margin: 10px;
   max-height: 200px;
   max-width: 200px;
+}
+
+.remmy{
+    width: 200px;
+    height: 300px;
+}
+
+.tournament{
+    width: 300px;
+    height: 200px;
 }
