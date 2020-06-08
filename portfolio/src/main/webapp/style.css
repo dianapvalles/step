@@ -4,14 +4,13 @@
   width: 650px;
 }
 
-#container {
+#random-fact-container {
   margin-top: 20px;
 }
 
 #fetch-container {
   margin-top: 20px;
 }
-
 
 /* Class with descendant selector */
 .image-thumbnails img{
