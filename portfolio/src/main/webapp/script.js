@@ -28,8 +28,11 @@ function addRandomFacts() {
 }
 
 /** Request content from server and add it to page */
-async function getUsingAsyncAwait() {
-  const response = await fetch('/data');
-  const data = await response.text();
-  document.getElementById('fetch-container').innerText = data;
+function getContent() {
+  fetch('/data')
+  .then(response => response.text())
+  .then(data => document.getElementById('fetch-container').innerText = data)
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
