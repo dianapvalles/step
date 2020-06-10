@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import java.lang.Object;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -28,10 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private static final ImmutableList<String> immutableList = ImmutableList.of("Mango","Strawberry","Banana");
+  Random rand = new Random();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<p>Favorite fruit:</p>" + immutableList.get(0));
+    response.getWriter().println("<p>Favorite fruit:</p>" + immutableList.get(rand.nextInt(3)));
   }
 }
