@@ -43,7 +43,6 @@ public class DataServlet extends HttpServlet {
 
   private String convertToJsonUsingGson(List fruits) {
     Gson gson = new Gson();
-    String json = gson.toJson(fruits);
-    return json;
+    return gson.toJson(fruits);
   }
 }
