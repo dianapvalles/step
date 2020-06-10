@@ -28,11 +28,11 @@ function addRandomFacts() {
 }
 
 /** Request content from server and add it to page */
-function getContentUsingArrowFunc() {
+function getServerMessage() {
   try{
       fetch('/data')
   .then(response => response.json())
-  .then((fruits) => document.getElementById('fetch-container').innerHTML = fruits);
+  .then((fruits) => document.getElementById('server-message-container').innerHTML = fruits);
   }
   catch(error){
     console.error('Error:', error);
