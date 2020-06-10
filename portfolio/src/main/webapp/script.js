@@ -30,7 +30,7 @@ function addRandomFacts() {
 /** Request content from server and add it to page */
 function getServerMessage() {
     fetch('/data')
-    .then(response => response.json())
+    .then(response => response.text())
     .then((fruits) => document.getElementById('server-message-container').innerHTML = fruits)
     .catch((error) => {
         console.error(error);

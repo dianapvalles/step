@@ -32,11 +32,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println(convertToJsonUsingGson(immutableList));
-  }
-
-  private String convertToJsonUsingGson(ImmutableList<String> fruits) {
-    Gson gson = new Gson();
-    return gson.toJson(fruits);
+    response.getWriter().println("<p>Favorite fruit: </p>" + immutableList.get(0));
   }
 }
