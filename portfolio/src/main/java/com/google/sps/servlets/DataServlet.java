@@ -13,6 +13,8 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+import com.google.common.collect.ImmutableList; 
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -25,23 +27,15 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> fruits;
-
-    @Override
-    public void init(){
-        fruits = new ArrayList<>();
-        fruits.add("Mango");
-        fruits.add("Strawberry");
-        fruits.add("Banana");
-    }
+  private static final ImmutableList<String> immutableList = ImmutableList.of("Mango","Strawberry","Banana");
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println(convertToJsonUsingGson(fruits));
+    response.getWriter().println(convertToJsonUsingGson(immutableList));
   }
 
-  private String convertToJsonUsingGson(List fruits) {
+  private String convertToJsonUsingGson(ImmutableList<String> fruits) {
     Gson gson = new Gson();
     return gson.toJson(fruits);
   }
