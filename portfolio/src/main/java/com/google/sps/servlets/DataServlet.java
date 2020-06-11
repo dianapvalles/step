@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private static final ImmutableList<String> immutableList = ImmutableList.of("Mango","Strawberry","Banana");
-  Random rand = new Random();
+  private Random rand = new Random();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
