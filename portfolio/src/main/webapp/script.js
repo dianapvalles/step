@@ -32,7 +32,7 @@ function getServerMessage() {
     fetch('/data')
     .then(response => response.json())
     .then((comments) => {
-        const history = document.getElementById('server-message-container');
+        const history = document.getElementById('commentsList');
         
         // Build the list of history entries.
         comments.forEach((line) => {
