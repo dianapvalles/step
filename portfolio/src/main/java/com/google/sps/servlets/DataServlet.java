@@ -14,7 +14,6 @@
 
 package com.google.sps.servlets;
 import com.google.common.collect.ImmutableList; 
-import java.lang.Object;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,12 +27,29 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private static final ImmutableList<String> immutableList = ImmutableList.of("Mango","Strawberry","Banana");
-  Random rand = new Random();
+  private final ArrayList<String> commentsList = new ArrayList();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<p>Favorite fruit:</p>" + immutableList.get(rand.nextInt(3)));
+    response.setContentType("application/json");
+    String json = new Gson().toJson(commentsList);
+    response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      // Get input from the form.
+      String txt = getParameter(request, "text-input","");
+      commentsList.add(txt);
+      response.sendRedirect("/index.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String comment, String defaultValue) {
+      String txt = request.getParameter(comment);
+
+      if(txt == null){
+          return defaultValue;
+      }
+      return txt;
   }
 }

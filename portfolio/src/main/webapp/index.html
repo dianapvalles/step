@@ -72,9 +72,16 @@
       <div id="random-fact-container"></div>
       <br />
 
-      <h3>Fetch message:</h3>  
-      <button onclick="getServerMessage()">Fetch</button>
-      <div id="server-message-container"></div>
+      <h3>History of comments:</h3>  
+      <button onclick="getServerMessage()">Click</button>
+      <div id="server-message-container"><ul id="commentsList"></ul></div>
+    
+      <form action="/data" method="POST">
+        <h3>Add a comment!</h3>
+        <textarea name="text-input"></textarea>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   </body>
 </html>

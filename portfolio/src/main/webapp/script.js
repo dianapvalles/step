@@ -30,9 +30,24 @@ function addRandomFacts() {
 /** Request content from server and add it to page */
 function getServerMessage() {
     fetch('/data')
-    .then(response => response.text())
-    .then((fruits) => document.getElementById('server-message-container').innerHTML = fruits)
+    .then(response => response.json())
+    .then((comments) => {
+        const history = document.getElementById('commentsList');
+        
+        // Build the list of history entries.
+        comments.forEach((line) => {
+        history.appendChild(createListComments(line));
+        });
+    })
     .catch((error) => {
         console.error(error);
     }); 
+}
+
+
+/** Creates an <li> element containing text. */
+function createListComments(text){
+    const liElement = document.createElement('li');
+    liElement.innerText = text;
+    return liElement;
 }
