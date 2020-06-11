@@ -4,7 +4,11 @@
   width: 650px;
 }
 
-#greeting-container {
+#random-fact-container {
+  margin-top: 20px;
+}
+
+#server-message-container {
   margin-top: 20px;
 }
 

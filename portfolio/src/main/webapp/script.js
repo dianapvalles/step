@@ -13,17 +13,26 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random facts to the page.
  */
-function addRandomGreeting() {
-  const greetings =
+function addRandomFacts() {
+  const facts =
       ['\'Wait for it...legendary\'', '\'Talent wins games, but teamwork and intelligence wins championships\'', 
       'Fact: I love sports, I practiced Taekwondo for 10 years', '\'Suit up\'', 'Fact: I have 3 dogs'];
 
   // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const random = facts[Math.floor(Math.random() * facts.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  document.getElementById('random-fact-container').innerText = random;
+}
+
+/** Request content from server and add it to page */
+function getServerMessage() {
+    fetch('/data')
+    .then(response => response.text())
+    .then((fruits) => document.getElementById('server-message-container').innerHTML = fruits)
+    .catch((error) => {
+        console.error(error);
+    }); 
 }
