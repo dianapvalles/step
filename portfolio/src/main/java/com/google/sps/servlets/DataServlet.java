@@ -13,6 +13,9 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.common.collect.ImmutableList; 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private final ArrayList<String> commentsList = new ArrayList();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -40,7 +42,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       // Get input from the form.
       String txt = getParameter(request, "text-input","");
-      commentsList.add(txt);
+      
+      // Store comments as entities in Datastore
+      Entity taskEntity = new Entity("Task");
+      taskEntity.setProperty("Comment:", txt);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(taskEntity);
       response.sendRedirect("/index.html");
   }
 
