@@ -47,11 +47,7 @@ function getServerMessage() {
 /** Creates an <li> element containing text. */
 function createListComments(text){
     const liElement = document.createElement('li');
-    liElement.className = 'text';
+    liElement.innerText = text.comment;
 
-    const titleElement = document.createElement('span');
-    titleElement.innerText = text.comment;
-
-    liElement.appendChild(titleElement);
     return liElement;
 }
