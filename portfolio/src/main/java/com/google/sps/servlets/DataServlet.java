@@ -34,10 +34,11 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  protected static final String ENTITY_TITLE = "Comment";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment");
+    Query query = new Query(ENTITY_TITLE);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -61,7 +62,7 @@ public class DataServlet extends HttpServlet {
       String comment = getParameter(request, "text-input","");
       
       // Store comments as entities in Datastore
-      Entity commentEntity = new Entity("Comment");
+      Entity commentEntity = new Entity(ENTITY_TITLE);
       commentEntity.setProperty("comment", comment);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
