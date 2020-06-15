@@ -36,12 +36,11 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
   protected static final String ENTITY_TITLE = "Comment";
   protected static final String ENTITY_PROPERTY_KEY = "comment";
+  protected static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query(ENTITY_TITLE);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     
     final List<Comment> comments = new ArrayList<>();
@@ -65,7 +64,6 @@ public class DataServlet extends HttpServlet {
       // Store comments as entities in Datastore
       Entity commentEntity = new Entity(ENTITY_TITLE);
       commentEntity.setProperty(ENTITY_PROPERTY_KEY, comment);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
       response.sendRedirect("/index.html");
   }
