@@ -37,6 +37,7 @@ public class DataServlet extends HttpServlet {
   protected static final String ENTITY_TITLE = "Comment";
   protected static final String ENTITY_PROPERTY_KEY = "comment";
   protected static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private static final Gson gson = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -51,7 +52,6 @@ public class DataServlet extends HttpServlet {
       comments.add(text);
     }
 
-    Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
   }    
