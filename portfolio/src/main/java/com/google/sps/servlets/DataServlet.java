@@ -34,9 +34,9 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  protected static final String ENTITY_TITLE = "Comment";
-  protected static final String ENTITY_PROPERTY_KEY = "comment";
-  protected static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private static final String ENTITY_TITLE = "Comment";
+  private static final String ENTITY_PROPERTY_KEY = "comment";
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private static final Gson gson = new Gson();
 
   @Override
