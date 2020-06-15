@@ -15,11 +15,11 @@
 package com.google.sps.data;
 
 /** An item in a comment list */
-public final class Task {
+public final class Comment {
   private final String comment;
   private final long id;
 
-  public Task(long id, String comment) {
+  public Comment(long id, String comment) {
     this.comment = comment;
     this.id = id;
   }

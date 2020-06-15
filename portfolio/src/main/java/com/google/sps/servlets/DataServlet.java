@@ -21,7 +21,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.common.collect.ImmutableList; 
 import com.google.gson.Gson;
-import com.google.sps.data.Task;
+import com.google.sps.data.Comment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,17 +42,17 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     
-    final List<Task> tasks = new ArrayList<>();
+    final List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String comment = (String) entity.getProperty("comment");
       long id = entity.getKey().getId();
-      Task task = new Task(id,comment);
-      tasks.add(task);
+      Comment text = new Comment(id,comment);
+      comments.add(text);
     }
 
     Gson gson = new Gson();
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(tasks));
+    response.getWriter().println(gson.toJson(comments));
   }    
 
   @Override
