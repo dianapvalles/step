@@ -29,7 +29,7 @@ function addRandomFacts() {
 
 /** Request content from server and add it to page */
 function getServerMessage() {
-    fetch('/list-comments')
+    fetch('/data')
     .then(response => response.json())
     .then((comments) => {
         const history = document.getElementById('commentsList');
