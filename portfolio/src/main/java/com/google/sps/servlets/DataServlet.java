@@ -44,16 +44,25 @@ public class DataServlet extends HttpServlet {
     Query query = new Query(ENTITY_TITLE);
     PreparedQuery results = datastore.prepare(query);
     
+    int userChoice = getUserChoice(request);
+    if(userChoice == -1){
+        response.setContentType("text/html");
+        response.getWriter().println("Please enter an integer between 1 and 3");
+        return;
+    }
+      
     final List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      String comment = (String) entity.getProperty(ENTITY_PROPERTY_KEY);
-      long id = entity.getKey().getId();
-      Comment text = new Comment(id,comment);
-      comments.add(text);
+        String comment = (String) entity.getProperty(ENTITY_PROPERTY_KEY);
+        long id = entity.getKey().getId();
+        Comment text = new Comment(id,comment);
+        comments.add(text);     
     }
 
+    final List<Comment> limitedComments = comments.subList(0,getUserChoice(request));
+
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
+    response.getWriter().println(gson.toJson(limitedComments));
   }    
 
   @Override
@@ -66,5 +75,25 @@ public class DataServlet extends HttpServlet {
       commentEntity.setProperty(ENTITY_PROPERTY_KEY, comment);
       datastore.put(commentEntity);
       response.sendRedirect("/index.html");
+  }
+
+  private int getUserChoice(HttpServletRequest request){
+      String userChoiceString = request.getParameter("user-number-choice");
+      int userChoice;
+
+      try{
+          userChoice = Integer.parseInt(userChoiceString);
+      }
+      catch(NumberFormatException e){
+          System.err.println("Could not convert to int: " + userChoiceString);
+          return -1;
+      }
+
+      if(userChoice < 1 || userChoice > 4){
+          System.err.println("User choice is out of range: " + userChoiceString);
+          return -1;
+      }
+
+      return userChoice;
   }
 }

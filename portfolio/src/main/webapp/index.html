@@ -73,9 +73,11 @@
       <br />
 
       <h3>History of comments:</h3>  
-      <button onclick="getServerMessage()">Click</button>
+      <p><b>Select the number of comments to be displayed:</b></p>
+      <input type="number" id="comments-number" name="user-number-choice" min="1" max ="4" value="1">
+      <button onclick="getServerMessage()" name="button-comments">Click</button>
       <div id="server-message-container"><ul id="commentsList"></ul></div>
-    
+
       <form action="/data" method="POST">
         <h3>Add a comment!</h3>
         <textarea name="text-input"></textarea>

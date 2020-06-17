@@ -29,7 +29,8 @@ function addRandomFacts() {
 
 /** Request content from server and add it to page */
 function getServerMessage() {
-    fetch('/data')
+    let userNum = document.getElementById('comments-number');
+    fetch('/data?user-number-choice=' + userNum.value)
     .then(response => response.json())
     .then((comments) => {
         const history = document.getElementById('commentsList');
@@ -48,6 +49,5 @@ function getServerMessage() {
 function createListComments(text){
     const liElement = document.createElement('li');
     liElement.innerText = text.comment;
-
     return liElement;
 }
