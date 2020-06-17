@@ -34,7 +34,7 @@ function getServerMessage() {
     .then(response => response.json())
     .then((comments) => {
         const history = document.getElementById('commentsList');
-        
+        history.innerHTML = "";
         // Build the list of history entries.
         comments.forEach((line) => {
         history.appendChild(createListComments(line));
