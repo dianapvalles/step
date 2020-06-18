@@ -49,5 +49,20 @@ function getServerMessage() {
 function createListComments(text){
     const liElement = document.createElement('li');
     liElement.innerText = text.comment;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Delete';
+    deleteButton.addEventListener('click',() => {
+        deleteComment(text);
+        liElement.remove();
+    });
+
+    liElement.appendChild(deleteButton);
     return liElement;
+}
+
+function deleteComment(text){
+    const params = new URLSearchParams();
+    params.append('id',text.id);
+    fetch('/delete-data', {method: 'POST', body: params});
 }
