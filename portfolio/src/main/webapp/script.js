@@ -46,14 +46,14 @@ function getServerMessage() {
 }
 
 /** Creates an <li> element containing text. */
-function createListComments(text){
+function createListComments(commentJson){
     const liElement = document.createElement('li');
-    liElement.innerText = text.comment;
+    liElement.innerText = commentJson.comment;
 
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'Delete';
     deleteButton.addEventListener('click',() => {
-        deleteComment(text);
+        deleteComment(commentJson);
         liElement.remove();
     });
 
@@ -61,9 +61,9 @@ function createListComments(text){
     return liElement;
 }
 
-function deleteComment(text){
+function deleteComment(commentJson){
     const params = new URLSearchParams();
-    params.append('id',text.id);
+    params.append('id',commentJson.id);
     fetch('/delete-data', {method: 'POST', body: params});
 }
 

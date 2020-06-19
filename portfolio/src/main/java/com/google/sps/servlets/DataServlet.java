@@ -45,24 +45,21 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
     
     int userChoice = getUserChoice(request);
-    if(userChoice == -1){
-        response.setContentType("text/html");
-        response.getWriter().println("Please enter an integer between 1 and 3");
-        return;
-    }
-      
+
     final List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
+        if(comments.size() >= userChoice){ 
+            break; 
+        }
+
         String comment = (String) entity.getProperty(ENTITY_PROPERTY_KEY);
         long id = entity.getKey().getId();
         Comment text = new Comment(id,comment);
         comments.add(text);     
     }
 
-    final List<Comment> limitedComments = comments.subList(0,getUserChoice(request));
-
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(limitedComments));
+    response.getWriter().println(gson.toJson(comments));
   }    
 
   @Override
