@@ -20,6 +20,12 @@
   margin-right: auto;
 }
 
+#info-window {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 /* Class with descendant selector */
 .image-thumbnails img{
   margin: 10px;

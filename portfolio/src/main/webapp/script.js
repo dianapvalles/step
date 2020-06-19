@@ -72,6 +72,7 @@ function createMap(){
     const map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 37.422, lng: -122.084 }, 
         zoom:10,
+        // Enables dark mode view
         styles: [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -156,21 +157,44 @@ function createMap(){
 
     map.setTilt(45);
 
-    var marker = new google.maps.Marker({
+    var markerMexico = new google.maps.Marker({
         position: {lat: 20.5809134, lng: -87.1218867},
         map: map,
-        title: 'Xcaret'
+        title: 'Click'
     });
 
-    var marker_1 = new google.maps.Marker({
+    var markerChicago = new google.maps.Marker({
         position: {lat: 41.8028818, lng: -87.5852623},
         map: map,
-        title: 'Museum of Science and Industry'
+        title: 'Click'
     });
 
-    var marker_2 = new google.maps.Marker({
-        position: {lat: 31.688066, lng: -106.4288767},
-        map: map,
-        title: 'EPCCJ high school'
+    var contentMexico = '<div id="info-window">'+
+        '<h1>Xcaret Mexico</h1>'+
+        '<p><b>Xcaret</b> is one of greatest nature parks. '+
+        'Here you can find underground rivers, the caribbean '+
+        'and Mexico\'s culture.</p>'+
+        '<a href="https://www.xcaret.com/en/?langRedirect=1">Attribution: Xcaret by Mexico</a>'+
+        '</div>';
+
+    var contentChicago = '<div id="info-window">'+
+        '<h1>Museum of Science and Industry</h1>'+
+        '<p><b>Museum of Science and Industry in Chicago</b>, one of the largest '+
+        'museums in the world. It inspires people to pursue science careers and it'+
+        'is the home of more than 35,000 artifacts.</p>'+
+        '<a href="https://www.msichicago.org/">Attribution: Museum of Science and Industry</a>'+
+        '</div>';
+
+    addInfoWindow(map,contentMexico,markerMexico);
+    addInfoWindow(map,contentChicago,markerChicago);
+}
+
+function addInfoWindow(map,contentForWindow,marker){
+    var infowindow = new google.maps.InfoWindow({
+        content: contentForWindow
+    });
+
+    marker.addListener('click',function(){
+        infowindow.open(map, marker);
     });
 }
