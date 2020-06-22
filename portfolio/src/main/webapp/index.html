@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKBx261NIGW5RGlPpiUEcEQKnyITd909s"></script>
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="createMap();">
     <div id="content">
       <h1>Diana's Portfolio</h1>
       <p>I am STEP intern studying <b>Computer Science</b> in
@@ -73,15 +74,20 @@
       <br />
 
       <h3>History of comments:</h3>  
-      <button onclick="getServerMessage()">Click</button>
+      <p><b>Select the number of comments to be displayed:</b></p>
+      <input type="number" id="comments-number" name="user-number-choice" min="1" max ="4" value="1">
+      <button onclick="getServerMessage()">Display</button>
       <div id="server-message-container"><ul id="commentsList"></ul></div>
-    
+     
       <form action="/data" method="POST">
         <h3>Add a comment!</h3>
         <textarea name="text-input"></textarea>
         <br />
         <button type="submit">Submit</button>
       </form>
+
+      <h2>Hello Google Maps!</h2>
+      <div id="map"></div>
     </div>
   </body>
 </html>
